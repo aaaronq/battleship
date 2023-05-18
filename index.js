@@ -1,9 +1,3 @@
-function sum(...args) {
-  return args.reduce((acc, cur) => acc + cur, 0);
+function Ship() {
+    const foo = "bar";
 }
-
-const foo = "bar";
-
-console.log("foooo");
-
-export default sum;
