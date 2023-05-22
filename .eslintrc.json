@@ -7,7 +7,7 @@
         "allowImportExportEverywhere": true
     },
     "rules": {
-        "prettier/prettier": ["error", { "tabWidth": 4 }],
+        "prettier/prettier": ["error", { "endOfLine": "auto", "tabWidth": 4 }],
         "no-unused-vars": "warn",
         "no-console": "off",
         "func-names": "off",
