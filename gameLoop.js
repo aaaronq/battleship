@@ -1,17 +1,24 @@
-import Player from "./player";
-import DOM from "./DOM";
+import Player from "./player.js";
 
-export default function battleShip() {
+export default function battleShip(DOM) {
     const humanPlayer = new Player("Player 1");
     const botPlayer = new Player("Player 2");
 
-    botPlayer.gameBoard.randomPlaceShips();
+    const botBoard = botPlayer.gameBoard.randomPlaceShips();
 
     // To be added later - place each ship from DOM and call allShipsPlaced()
     // on gameboard to determine when the game starts
-    humanPlayer.gameBoard.randomPlaceShips();
+    const humanBoard = humanPlayer.gameBoard.randomPlaceShips();
 
-    while (!humanPlayer.gameBoard.isOver() || !botPlayer.gameBoard.isOver()) {
+    DOM.placeShips(humanBoard, "human");
+    DOM.placeShips(botBoard, "bot");
+
+    DOM.updateGrid(humanPlayer);
+
+    while (
+        !humanPlayer.gameBoard.isGameOver() ||
+        !botPlayer.gameBoard.isGameOver()
+    ) {
         // Human attack
         const coords = DOM.getUserInput();
         humanPlayer.attack(botPlayer, coords);
@@ -20,7 +27,7 @@ export default function battleShip() {
         botPlayer.attack(humanPlayer);
     }
 
-    if (humanPlayer.gameBoard.isOver()) {
+    if (humanPlayer.gameBoard.isGameOver()) {
         DOM.displayWin(humanPlayer.name);
     } else {
         DOM.displayWin(botPlayer.name);

@@ -1,3 +1,4 @@
-import battleShip from "./gameLoop";
+import battleShip from "./gameLoop.js";
+import DOM from "./DOM.js";
 
-battleShip();
+battleShip(DOM);

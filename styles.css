@@ -1,0 +1,64 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    padding: 30px;
+    background-color: gold;
+    text-align: center;
+    box-shadow: 1px 3px 6px rgb(0, 0, 0, 0.3);
+}
+
+header h1 {
+    font-size: 5rem;
+}
+
+main h2 {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-size: 2rem;
+}
+
+.container {
+    margin: 0 auto;
+    width: 1800px;
+    border: 1px solid red;
+    text-align: center;
+}
+
+.grid-container {
+    display: flex;
+    gap: 200px;
+}
+
+.grid {
+    width: 800px;
+    height: 800px;
+    border: 1px solid blue;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+}
+
+.square{
+    border: 1px solid black;
+}
+
+.ship {
+    background-color: blue;
+}
+
+.hoverable:hover {
+    background-color: salmon;
+}
+
+.placingValid {
+    background-color: green;
+}
+
+.placingInvalid {
+    background-color: red;
+}

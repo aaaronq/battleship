@@ -1,4 +1,4 @@
-import Ship from "./ship";
+import Ship from "./ship.js";
 
 export default function GameBoard() {
     const board = [];
@@ -6,8 +6,8 @@ export default function GameBoard() {
     const ships = [];
 
     function getRandomCoords() {
-        const x = Math.ceil(Math.random() * 9);
-        const y = Math.ceil(Math.random() * 9);
+        const x = Math.floor(Math.random() * 10);
+        const y = Math.floor(Math.random() * 10);
         return [x, y];
     }
 
@@ -73,8 +73,7 @@ export default function GameBoard() {
         randomPlaceShip(3);
         randomPlaceShip(3);
         randomPlaceShip(2);
-        console.log(board);
-        return ships;
+        return board;
     }
 
     function receiveAttack(coords) {
