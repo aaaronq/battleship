@@ -5,7 +5,7 @@ export default function battleShip() {
     const humanPlayer = new Player("Player 1");
     const botPlayer = new Player("Player 2");
 
-    // const botBoard = botPlayer.gameBoard.randomPlaceShips();
+    const botBoard = botPlayer.gameBoard.randomPlaceShips();
 
     // To be added later - place each ship from DOM and call allShipsPlaced()
     // on gameboard to determine when the game starts
@@ -38,10 +38,13 @@ export default function battleShip() {
         game();
     });
 
-    // DOM.placeShips(botBoard, "bot");
+    DOM.placeShips(botBoard, "bot");
 
     // DOM.updateGrid(humanPlayer);
+
+    // This will have to be async too to await user input for coords to attack
     function game() {
+        console.log("Game begins");
         while (
             !humanPlayer.gameBoard.isGameOver() ||
             !botPlayer.gameBoard.isGameOver()

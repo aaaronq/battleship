@@ -44,8 +44,6 @@ export default function GameBoard() {
     }
 
     function placeShip(length, direction, [x, y]) {
-        console.log(direction);
-        console.log(`placeship is called with ${x} ${y}`);
         const possibleMoves = getPossibleMoves(length, direction, +x, +y);
         if (!areValidMoves(possibleMoves)) return false;
         const ship = Ship(length);
@@ -53,7 +51,6 @@ export default function GameBoard() {
         for (const move of possibleMoves) {
             board[move] = ship;
         }
-        console.log("returns board");
         return board;
     }
 
