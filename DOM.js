@@ -13,7 +13,7 @@ const DOM = (function DOM() {
             for (let j = 0; j < 10; j++) {
                 const square = document.createElement("div");
                 square.classList.add("square");
-                square.dataset.coords = `[${i}, ${j}]`;
+                square.dataset.coords = `${j},${i}`;
                 grid.appendChild(square);
             }
         }
@@ -34,7 +34,7 @@ const DOM = (function DOM() {
         const shipcoords = Object.keys(board);
         shipcoords.forEach((ship) => {
             const [x, y] = ship.split(",");
-            const square = grid.querySelector(`[data-coords="[${x}, ${y}]"]`);
+            const square = grid.querySelector(`[data-coords="${x},${y}"`);
             square.classList.add("ship");
         });
     }
@@ -61,53 +61,73 @@ const DOM = (function DOM() {
 
             const getCoords = (square) => resolve(square.dataset.coords);
 
+            const getCoordsHandler = (square) => {
+                return () => {
+                    getCoords(square);
+                    cleanup();
+                };
+            };
+
             function cleanup() {
                 squares.forEach((square) => {
-                    square.removeEventListener("click", getCoords);
+                    square.removeEventListener(
+                        "click",
+                        getCoordsHandler(square)
+                    );
                     square.classList.remove("hoverable");
                 });
             }
 
             squares.forEach((square) => {
                 square.classList.add("hoverable");
-                square.addEventListener("click", () => {
-                    cleanup();
-                    getCoords(square);
-                });
+                square.addEventListener("click", getCoordsHandler(square));
             });
         });
     }
 
     // getClick().then((coords) => console.log(coords));
 
-    function placeShip(size, direction) {
+    // Direction handling
+    let direction = "vertical";
+
+    const directionBtn = document.getElementById("changeDirection");
+    directionBtn.addEventListener("click", () => {
+        if (direction === "vertical") {
+            direction = "horizontal";
+            directionBtn.innerText = "Direction = horizontal";
+        } else {
+            direction = "vertical";
+            directionBtn.innerText = "Direction = vertical";
+        }
+    });
+
+    const getDirection = () => direction;
+
+    // Place a single ship
+    function placeShip(size) {
         return new Promise((resolve) => {
             const squares = humanGrid.childNodes;
-
-            const getCoords = (square) => resolve(square.dataset.coords);
 
             function highlightShip(square) {
                 // Get the adjacent squares
                 const toBeHighlight = [square];
-                console.log(square.dataset.coords); // BUG - CURRENTLY RETURNS [0, 0] STRING - NEED TO REMOVE BRACKETS OR ELSE X AND Y ARENT RETURNED PROPERLY
                 const [x, y] = square.dataset.coords.split(",");
                 if (direction === "vertical") {
                     for (let i = 1; i < size; i++) {
-                        const newY = y + i;
-                        console.log(newY);
+                        const newY = +y + i;
                         if (newY < 10) {
                             const adjacent = humanGrid.querySelector(
-                                `[data-coords="[${x}, ${newY}]"]`
+                                `[data-coords="${x},${newY}"]`
                             );
                             toBeHighlight.push(adjacent);
                         }
                     }
                 } else {
                     for (let i = 1; i < size; i++) {
-                        const newX = x + i;
+                        const newX = +x + i;
                         if (newX < 10) {
                             const adjacent = humanGrid.querySelector(
-                                `[data-coords="[${x}, ${newX}]"]`
+                                `[data-coords="${newX},${y}"]`
                             );
                             toBeHighlight.push(adjacent);
                         }
@@ -123,39 +143,63 @@ const DOM = (function DOM() {
                 });
             }
 
+            function createMouseHandler(square) {
+                return () => {
+                    highlightShip(square);
+                };
+            }
+
+            const getCoords = (square) => {
+                const coords = square.dataset.coords.split(",");
+                if (direction === "vertical" && +coords[1] + size - 1 < 10) {
+                    resolve(coords);
+                    cleanup();
+                }
+                if (direction === "horizontal" && +coords[0] + size - 1 < 10) {
+                    resolve(coords);
+                    cleanup();
+                }
+            };
+
+            const createClickHandler = (square) => () => {
+                getCoords(square);
+            };
+
             function cleanup() {
                 squares.forEach((square) => {
-                    square.removeEventListener("click", getCoords);
+                    square.removeEventListener("click", square.clickHandler);
                     square.removeEventListener(
                         "mouseover",
-                        highlightShip(square)
+                        square.mouseOverHandler
                     );
                     square.removeEventListener(
                         "mouseout",
-                        highlightShip(square)
+                        square.mouseOutHandler
                     );
+                    square.classList.remove("placingValid");
                 });
             }
 
             squares.forEach((square) => {
-                square.addEventListener("mouseover", highlightShip(square));
-                square.addEventListener("mouseout", highlightShip(square));
-                square.addEventListener("click", () => {
-                    cleanup();
-                    getCoords(square);
-                });
+                square.mouseOverHandler = createMouseHandler(square);
+                square.mouseOutHandler = createMouseHandler(square);
+                square.clickHandler = createClickHandler(square);
+
+                square.addEventListener("mouseover", square.mouseOverHandler);
+                square.addEventListener("mouseout", square.mouseOutHandler);
+                square.addEventListener("click", square.clickHandler);
             });
         });
     }
-
-    placeShip(5, "vertical");
 
     return {
         getClick,
         getUserInput,
         updateGrid,
         displayWin,
-        placeShips
+        placeShips,
+        getDirection,
+        placeShip
     };
 })();
 

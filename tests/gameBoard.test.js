@@ -86,9 +86,6 @@ it("Can tell is game is over", () => {
     expect(testBoard.isGameOver()).toBe(true);
 });
 
-it("Can randomly place ships", () => {
-    expect(testBoard.randomPlaceShips().length).toBe(5);
-})
 
 it("Won't attack out of bounds coords", () => {
     testBoard.randomPlaceShips();
@@ -98,7 +95,7 @@ it("Won't attack out of bounds coords", () => {
     expect(testBoard.receiveAttack([0, -1])).toBe(false);
 });
 
-it("Knows when all ships have been placed", () => {
+it("Can randomly place ships & knows when all ships have been placed", () => {
     testBoard.randomPlaceShips();
     expect(testBoard.allShipsPlaced()).toBe(true);
 });

@@ -30,6 +30,27 @@ main h2 {
     text-align: center;
 }
 
+.btns {
+    margin-left: 11%;
+    display: flex;
+    gap: 50px;
+    margin-bottom: 15px;
+}
+
+button {
+    font-size: 1rem;
+    cursor: pointer;
+    border: 0;
+    border-radius: 100vw;
+    padding: 10px 15px;
+    background-color: lightblue;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+
 .grid-container {
     display: flex;
     gap: 200px;
@@ -56,9 +77,11 @@ main h2 {
 }
 
 .placingValid {
-    background-color: green;
+    background-color: blue;
+    cursor: pointer;
 }
 
 .placingInvalid {
     background-color: red;
+    cursor: not-allowed;
 }
