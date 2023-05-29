@@ -16,13 +16,13 @@ export default function Player(name) {
     }
 
     function attack(opponent, coords) {
-        if (coords !== undefined && !Array.isArray(coords)) return;
+        if (coords !== undefined && !Array.isArray(coords)) return false;
         let attackCoords = coords;
         // Handle bots input
         if (attackCoords === undefined) {
             attackCoords = getBotCoords(opponent.gameBoard.hits);
         }
-        opponent.gameBoard.receiveAttack(attackCoords);
+        return opponent.gameBoard.receiveAttack(attackCoords);
     }
     return {
         name,

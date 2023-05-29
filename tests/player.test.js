@@ -42,7 +42,7 @@ it("All Bot attacks are valid", () => {
     expect(mockReturnValue.length).toBe(2);
     expect(mockReturnValue[0]).toBeGreaterThanOrEqual(0);
     expect(mockReturnValue[0]).toBeLessThanOrEqual(9);
-    expect(mockReturnValue[1]).toBeGreaterThanOrEqual(1);
+    expect(mockReturnValue[1]).toBeGreaterThanOrEqual(0);
     expect(mockReturnValue[1]).toBeLessThanOrEqual(9);
 });
 

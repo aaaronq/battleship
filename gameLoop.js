@@ -5,62 +5,97 @@ export default function battleShip() {
     const humanPlayer = new Player("Player 1");
     const botPlayer = new Player("Player 2");
 
-    const botBoard = botPlayer.gameBoard.randomPlaceShips();
+    (function placeShips() {
+        const botBoard = botPlayer.gameBoard.randomPlaceShips();
+        // DOM.placeShips(botBoard, "bot");
 
-    // To be added later - place each ship from DOM and call allShipsPlaced()
-    // on gameboard to determine when the game starts
+        const humanBoard = (async () => {
+            let board;
+            const carrierCords = await DOM.placeShip(5);
+            board = humanPlayer.gameBoard.placeShip(
+                5,
+                DOM.getDirection(),
+                carrierCords
+            );
+            DOM.placeShips(board, "human");
 
-    const humanBoard = (async () => {
-        let board;
-        const carrierCords = await DOM.placeShip(5);
-        board = humanPlayer.gameBoard.placeShip(5, DOM.getDirection(), carrierCords);
-        DOM.placeShips(board, "human");
+            const battleshipCords = await DOM.placeShip(4);
+            board = humanPlayer.gameBoard.placeShip(
+                4,
+                DOM.getDirection(),
+                battleshipCords
+            );
+            DOM.placeShips(board, "human");
 
-        const battleshipCords = await DOM.placeShip(4);
-        board = humanPlayer.gameBoard.placeShip(4, DOM.getDirection(), battleshipCords);
-        DOM.placeShips(board, "human");
+            const destroyerCords = await DOM.placeShip(3);
+            board = humanPlayer.gameBoard.placeShip(
+                3,
+                DOM.getDirection(),
+                destroyerCords
+            );
+            DOM.placeShips(board, "human");
 
-        const destroyerCords = await DOM.placeShip(3);
-        board = humanPlayer.gameBoard.placeShip(3, DOM.getDirection(), destroyerCords);
-        DOM.placeShips(board, "human");
+            const submarineCords = await DOM.placeShip(3);
+            board = humanPlayer.gameBoard.placeShip(
+                3,
+                DOM.getDirection(),
+                submarineCords
+            );
+            DOM.placeShips(board, "human");
 
-        const submarineCords = await DOM.placeShip(3);
-        board = humanPlayer.gameBoard.placeShip(3, DOM.getDirection(), submarineCords);
-        DOM.placeShips(board, "human");
+            const patrolBoatCoords = await DOM.placeShip(2);
+            board = humanPlayer.gameBoard.placeShip(
+                2,
+                DOM.getDirection(),
+                patrolBoatCoords
+            );
+            return board;
+        })();
 
-        const patrolBoatCoords = await DOM.placeShip(2);
-        board = humanPlayer.gameBoard.placeShip(2, DOM.getDirection(), patrolBoatCoords);
-        return board;
+        humanBoard.then((board) => {
+            DOM.placeShips(board, "human");
+            game();
+        });
     })();
 
-    humanBoard.then((board) => {
-        DOM.placeShips(board, "human");
-        game();
-    });
-
-    DOM.placeShips(botBoard, "bot");
-
-    // DOM.updateGrid(humanPlayer);
-
-    // This will have to be async too to await user input for coords to attack
-    function game() {
-        console.log("Game begins");
+    async function game() {
+        DOM.displayMessage("Game begins");
+        console.log("game begins");
         while (
-            !humanPlayer.gameBoard.isGameOver() ||
-            !botPlayer.gameBoard.isGameOver()
+            !(
+                humanPlayer.gameBoard.isGameOver() ||
+                botPlayer.gameBoard.isGameOver()
+            )
         ) {
             // Human attack
-            const coords = DOM.getUserInput();
-            humanPlayer.attack(botPlayer, coords);
+            while (true) {
+                const coords = await DOM.getClick();
+                const success = humanPlayer.attack(
+                    botPlayer,
+                    coords.split(",")
+                );
+                console.log(success);
+                if (success) {
+                    DOM.updateGrid(botPlayer);
+                    break;
+                }
+            }
 
             // Bot attack
-            botPlayer.attack(humanPlayer);
+            while (true) {
+                if (botPlayer.attack(humanPlayer)) {
+                    DOM.updateGrid(humanPlayer);
+                    break;
+                }
+            }
         }
 
+        // Display Winner
         if (humanPlayer.gameBoard.isGameOver()) {
-            DOM.displayWin(humanPlayer.name);
+            console.log(humanPlayer.gameBoard.isGameOver());
+            DOM.displayMessage(`${botPlayer.name} won the game!`);
         } else {
-            DOM.displayWin(botPlayer.name);
+            DOM.displayMessage(`${humanPlayer.name} won the game!`);
         }
     }
 }

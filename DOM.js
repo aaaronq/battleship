@@ -2,8 +2,8 @@ const DOM = (function DOM() {
     function getUserInput() {
         console.log("getuserinput");
     }
-    function displayWin(winnerName) {
-        console.log(`${winnerName} won the game!`);
+    function displayMessage(message) {
+        document.getElementById("displayMessage").innerText = message;
     }
 
     function generateGrid() {
@@ -47,17 +47,24 @@ const DOM = (function DOM() {
         } else {
             grid = botGrid;
         }
-        let hits = player.gameBoard.hits;
-        hits.forEach((hit) => {
-            const square = grid.querySelector(`[data-coords=${hit}]`);
+        const hits = player.gameBoard.hits;
+        const hitKeys = Object.keys(hits);
+        console.log(hitKeys);
+        hitKeys.forEach((hit) => {
+            const square = grid.querySelector(`[data-coords="${hit}"]`);
+            if (hits[hit] === "hit") {
+                square.classList.add("hit");
+            } else {
+                square.classList.add("miss");
+            }
         });
     }
 
     // Async function to get a single coordinate input from user
     function getClick() {
+        console.log("called");
         return new Promise((resolve) => {
-            const squares = humanGrid.childNodes;
-            console.log(squares);
+            const squares = botGrid.childNodes;
 
             const getCoords = (square) => resolve(square.dataset.coords);
 
@@ -196,7 +203,7 @@ const DOM = (function DOM() {
         getClick,
         getUserInput,
         updateGrid,
-        displayWin,
+        displayMessage,
         placeShips,
         getDirection,
         placeShip

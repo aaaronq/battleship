@@ -73,6 +73,7 @@ button:active {
 }
 
 .hoverable:hover {
+    cursor: pointer;
     background-color: salmon;
 }
 
@@ -84,4 +85,31 @@ button:active {
 .placingInvalid {
     background-color: red;
     cursor: not-allowed;
+}
+
+#humanGrid .hit {
+    background-color: red;
+}
+
+#humanGrid .miss {
+    background-color: green;
+}
+
+#botGrid .hit {
+    background-color: green;
+}
+
+#botGrid .miss {
+    background-color: red;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 30px;
+    background-color: slategray;
+    text-align: center;
+    box-shadow: 1px 3px 6px rgb(0, 0, 0, 0.3);
 }
