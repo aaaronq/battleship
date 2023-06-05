@@ -92,7 +92,7 @@ button:active {
 }
 
 #humanGrid .miss {
-    background-color: green;
+    background-color: gray;
 }
 
 #botGrid .hit {
@@ -100,7 +100,7 @@ button:active {
 }
 
 #botGrid .miss {
-    background-color: red;
+    background-color: gray;
 }
 
 footer {

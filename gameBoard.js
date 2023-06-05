@@ -1,9 +1,9 @@
 import Ship from "./ship.js";
 
 export default function GameBoard() {
-    const board = [];
+    let board = [];
     const hits = [];
-    const ships = [];
+    let ships = [];
 
     function getRandomCoords() {
         const x = Math.floor(Math.random() * 10);
@@ -101,6 +101,7 @@ export default function GameBoard() {
         receiveAttack,
         randomPlaceShips,
         allShipsPlaced,
-        isGameOver
+        isGameOver,
+        checkInvalid
     };
 }

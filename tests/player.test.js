@@ -76,8 +76,50 @@ it("Bot will not attack positions it already has", () => {
     const mockReturnValue = mockPlayer.gameBoard.receiveAttack.mock.calls[0][0];
     console.log(mockReturnValue);
     expect(mockReturnValue[0]).toBe(9);
+});
+
+it('Bot will attack adjacent positions it has successfully hit before', () => {
+
+    let mockPlayer = {
+        gameBoard: {
+            hits: [],
+            receiveAttack: jest.fn(),
+        }
+    };
+
+    mockPlayer.gameBoard.hits[[1,1]] = "hit";
+
+    // At this stage, bot has hit 1,1 sucessfully, so should attack adjacent positions next
+
+    botPlayer.attack(mockPlayer)
+    const mockReturnValue = mockPlayer.gameBoard.receiveAttack.mock.calls[0][0];
+    console.log(mockReturnValue);
+    expect(mockReturnValue).toEqual([0, 0]);
 
 });
+
+it.only('Bot will attack adjacent positions it has successfully hit before', () => {
+
+    let mockPlayer = {
+        gameBoard: {
+            hits: [],
+            receiveAttack: jest.fn(),
+        }
+    };
+
+    mockPlayer.gameBoard.hits[[1,1]] = "hit";
+    mockPlayer.gameBoard.hits[[0,0]] = "miss";
+
+
+    // At this stage, bot has hit 1,1 sucessfully, so should attack adjacent positions next
+
+    botPlayer.attack(mockPlayer)
+    const mockReturnValue = mockPlayer.gameBoard.receiveAttack.mock.calls[0][0];
+    console.log(mockReturnValue);
+    expect(mockReturnValue).toEqual([0,1]);
+
+});
+
 
 
 

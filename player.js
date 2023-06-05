@@ -4,22 +4,59 @@ export default function Player(name) {
     const gameBoard = GameBoard();
 
     function getBotCoords(pastHits) {
-        // More complex implementation possible later
-        let coords = gameBoard.getRandomCoords();
-
-        // Check if already hit
-        while (pastHits[coords]) {
-            coords = gameBoard.getRandomCoords();
+        // Check if coords already hit
+        console.log("getbotcoords called");
+        function checkIfHit(coords) {
+            if (pastHits[coords]) return true;
+            return false;
         }
 
-        return coords;
+        // Get list of successful hits
+        const hits = Object.keys(pastHits).filter(
+            (hit) => pastHits[hit] === "hit"
+        );
+
+        if (hits.length === 0) return gameBoard.getRandomCoords();
+
+        // Check adjacent squares to those hits     BROKEN
+        let coords = null;
+
+        hits.forEach((hit) => {
+            const [x, y] = hit.split(",");
+            for (let i = -1; i < 2; i++) {
+                for (let j = -1; j < 2; j++) {
+                    const newCoords = [+x + j, +y + i];
+                    console.log(newCoords);
+                    if (
+                        !(
+                            checkIfHit(newCoords) ||
+                            gameBoard.checkInvalid(newCoords)
+                        )
+                    ) {
+                        console.log("foo");
+                        console.log(newCoords);
+                        coords = newCoords;
+                        return;
+                    }
+                }
+            }
+        });
+
+        if (coords) {
+            console.log("success very nice");
+            console.log(coords);
+            return coords;
+        }
+
+        return gameBoard.getRandomCoords();
     }
 
     function attack(opponent, coords) {
         if (coords !== undefined && !Array.isArray(coords)) return false;
         let attackCoords = coords;
         // Handle bots input
-        if (attackCoords === undefined) {
+        if (!attackCoords) {
+            console.log(opponent.gameBoard.hits);
             attackCoords = getBotCoords(opponent.gameBoard.hits);
         }
         return opponent.gameBoard.receiveAttack(attackCoords);

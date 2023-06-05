@@ -40,7 +40,6 @@ const DOM = (function DOM() {
     }
 
     function updateGrid(player) {
-        console.log("foo");
         let grid;
         if (player.name === "Player 1") {
             grid = humanGrid;
@@ -49,7 +48,6 @@ const DOM = (function DOM() {
         }
         const hits = player.gameBoard.hits;
         const hitKeys = Object.keys(hits);
-        console.log(hitKeys);
         hitKeys.forEach((hit) => {
             const square = grid.querySelector(`[data-coords="${hit}"]`);
             if (hits[hit] === "hit") {
@@ -62,7 +60,6 @@ const DOM = (function DOM() {
 
     // Async function to get a single coordinate input from user
     function getClick() {
-        console.log("called");
         return new Promise((resolve) => {
             const squares = botGrid.childNodes;
 
@@ -199,6 +196,8 @@ const DOM = (function DOM() {
         });
     }
 
+    const randomShipsBtn = document.getElementById('randomShips');
+
     return {
         getClick,
         getUserInput,
@@ -206,7 +205,8 @@ const DOM = (function DOM() {
         displayMessage,
         placeShips,
         getDirection,
-        placeShip
+        placeShip,
+        randomShipsBtn
     };
 })();
 

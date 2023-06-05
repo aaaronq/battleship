@@ -6,11 +6,11 @@ export default function battleShip() {
     const botPlayer = new Player("Player 2");
 
     (function placeShips() {
-        const botBoard = botPlayer.gameBoard.randomPlaceShips();
-        // DOM.placeShips(botBoard, "bot");
+        botPlayer.gameBoard.randomPlaceShips();
 
         const humanBoard = (async () => {
             let board;
+
             const carrierCords = await DOM.placeShip(5);
             board = humanPlayer.gameBoard.placeShip(
                 5,
