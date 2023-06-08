@@ -42,7 +42,8 @@ main h2 {
 }
 
 button {
-    font-size: 1rem;
+    font-family: Roboto;
+    font-size: 1.15rem;
     cursor: pointer;
     border: 0;
     border-radius: 100vw;
@@ -123,6 +124,23 @@ footer {
     box-shadow: 1px 3px 6px rgb(0, 0, 0, 0.3);
 }
 
-footer > .github {
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+a > .github {
     font-size: 42px;
+}
+
+a > .github:hover {
+    transform: rotate(360deg);
+    transition: all 0.7s;
+    cursor: pointer;
+}
+
+a > .github:active {
+    transform: scale(1.1);
+    transition: all 0.05s;
+    cursor: pointer;
 }
