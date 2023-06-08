@@ -60,7 +60,6 @@ export default function battleShip() {
 
     async function game() {
         DOM.displayMessage("Game begins");
-        console.log("game begins");
         while (
             !(
                 humanPlayer.gameBoard.isGameOver() ||
@@ -74,7 +73,6 @@ export default function battleShip() {
                     botPlayer,
                     coords.split(",")
                 );
-                console.log(success);
                 if (success) {
                     DOM.updateGrid(botPlayer);
                     break;
@@ -92,7 +90,6 @@ export default function battleShip() {
 
         // Display Winner
         if (humanPlayer.gameBoard.isGameOver()) {
-            console.log(humanPlayer.gameBoard.isGameOver());
             DOM.displayMessage(`${botPlayer.name} won the game!`);
         } else {
             DOM.displayMessage(`${humanPlayer.name} won the game!`);

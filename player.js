@@ -5,7 +5,6 @@ export default function Player(name) {
 
     function getBotCoords(pastHits) {
         // Check if coords already hit
-        console.log("getbotcoords called");
         function checkIfHit(coords) {
             if (pastHits[coords]) return true;
             return false;
@@ -26,15 +25,12 @@ export default function Player(name) {
             for (let i = -1; i < 2; i++) {
                 for (let j = -1; j < 2; j++) {
                     const newCoords = [+x + j, +y + i];
-                    console.log(newCoords);
                     if (
                         !(
                             checkIfHit(newCoords) ||
                             gameBoard.checkInvalid(newCoords)
                         )
                     ) {
-                        console.log("foo");
-                        console.log(newCoords);
                         coords = newCoords;
                         return;
                     }
@@ -43,8 +39,6 @@ export default function Player(name) {
         });
 
         if (coords) {
-            console.log("success very nice");
-            console.log(coords);
             return coords;
         }
 
@@ -56,7 +50,6 @@ export default function Player(name) {
         let attackCoords = coords;
         // Handle bots input
         if (!attackCoords) {
-            console.log(opponent.gameBoard.hits);
             attackCoords = getBotCoords(opponent.gameBoard.hits);
         }
         return opponent.gameBoard.receiveAttack(attackCoords);
