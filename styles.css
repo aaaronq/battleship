@@ -192,13 +192,19 @@ a > .github:active {
     }
 
     .grid {
-        width: 80%;
+        width: 75%;
+    }
+
+    #botGrid {
+        margin-bottom: 50px;
     }
 
     footer {
-        position: relative;
+        position: fixed;
         margin-top: 15px;
         font-size: 0.75rem;
         padding: 10px;
+        margin-bottom: 0;
     }
+
   }
