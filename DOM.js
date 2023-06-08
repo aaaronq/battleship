@@ -196,8 +196,6 @@ const DOM = (function DOM() {
         });
     }
 
-    const randomShipsBtn = document.getElementById('randomShips');
-
     return {
         getClick,
         getUserInput,
@@ -205,8 +203,7 @@ const DOM = (function DOM() {
         displayMessage,
         placeShips,
         getDirection,
-        placeShip,
-        randomShipsBtn
+        placeShip
     };
 })();
 

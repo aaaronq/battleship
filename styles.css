@@ -6,35 +6,39 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: Roboto;
+}
+
 header {
     padding: 30px;
-    background-color: gold;
+    background-color: #a2e4b8;
     text-align: center;
     box-shadow: 1px 3px 6px rgb(0, 0, 0, 0.3);
 }
 
 header h1 {
     font-size: 5rem;
+    color: black;
 }
 
 main h2 {
-    margin-top: 25px;
-    margin-bottom: 25px;
+    margin-top: 45px;
+    margin-bottom: 15px;
     font-size: 2rem;
 }
 
 .container {
     margin: 0 auto;
     width: 1800px;
-    border: 1px solid red;
     text-align: center;
 }
 
 .btns {
-    margin-left: 11%;
+    width: 800px;
     display: flex;
-    gap: 50px;
-    margin-bottom: 15px;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
 button {
@@ -43,13 +47,12 @@ button {
     border: 0;
     border-radius: 100vw;
     padding: 10px 15px;
-    background-color: lightblue;
+    background-color: #a2e4b8;
 }
 
 button:active {
     transform: scale(0.95);
 }
-
 
 .grid-container {
     display: flex;
@@ -59,12 +62,12 @@ button:active {
 .grid {
     width: 800px;
     height: 800px;
-    border: 1px solid blue;
+    border: 1px solid black;
     display: grid;
     grid-template-columns: repeat(10, 1fr);
 }
 
-.square{
+.square {
     border: 1px solid black;
 }
 
@@ -105,11 +108,21 @@ button:active {
 
 footer {
     position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
     left: 0;
     bottom: 0;
     width: 100%;
     padding: 30px;
+    color: white;
+    letter-spacing: 0.2ch;
     background-color: slategray;
     text-align: center;
     box-shadow: 1px 3px 6px rgb(0, 0, 0, 0.3);
+}
+
+footer > .github {
+    font-size: 42px;
 }
