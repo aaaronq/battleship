@@ -160,6 +160,7 @@ a > .github:active {
 @media only screen and (max-width: 740px) {
     body {
       background-color: lightblue;
+      height: 100vh
     }
 
     header {
@@ -195,7 +196,7 @@ a > .github:active {
     }
 
     footer {
-        position: relative;
+        position: fixed;
         font-size: 0.75rem;
         padding: 10px;
     }
