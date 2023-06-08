@@ -155,11 +155,19 @@ const DOM = (function DOM() {
 
             const getCoords = (square) => {
                 const coords = square.dataset.coords.split(",");
-                if (direction === "vertical" && +coords[1] + size - 1 < 10) {
+                if (
+                    direction === "vertical" &&
+                    +coords[1] + size - 1 < 10 &&
+                    !square.classList.contains("ship")
+                ) {
                     resolve(coords);
                     cleanup();
                 }
-                if (direction === "horizontal" && +coords[0] + size - 1 < 10) {
+                if (
+                    direction === "horizontal" &&
+                    +coords[0] + size - 1 < 10 &&
+                    !square.classList.contains("ship")
+                ) {
                     resolve(coords);
                     cleanup();
                 }
