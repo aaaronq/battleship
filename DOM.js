@@ -196,6 +196,10 @@ const DOM = (function DOM() {
         });
     }
 
+    function removeDirectionBtn() {
+        document.getElementById("changeDirection").remove();
+    }
+
     return {
         getClick,
         getUserInput,
@@ -203,7 +207,8 @@ const DOM = (function DOM() {
         displayMessage,
         placeShips,
         getDirection,
-        placeShip
+        placeShip,
+        removeDirectionBtn
     };
 })();
 

@@ -54,6 +54,7 @@ export default function battleShip() {
 
         humanBoard.then((board) => {
             DOM.placeShips(board, "human");
+            DOM.removeDirectionBtn();
             game();
         });
     })();
