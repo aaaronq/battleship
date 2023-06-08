@@ -151,15 +151,12 @@ a > .github:active {
     .grid {
         width: 40%;
     }
-    body {
-        background-color: red;
-      }
     
 }
 
 @media only screen and (max-width: 740px) {
     body {
-      background-color: lightblue;
+      background-color: white;
       height: 100vh
     }
 
@@ -204,7 +201,7 @@ a > .github:active {
         position: fixed;
         margin-top: 15px;
         font-size: 0.75rem;
-        padding: 10px;
+        padding: 3px;
         margin-bottom: 0;
     }
 
