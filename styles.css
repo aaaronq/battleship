@@ -196,7 +196,7 @@ a > .github:active {
     }
 
     footer {
-        position: fixed;
+        position: relative;
         margin-top: 15px;
         font-size: 0.75rem;
         padding: 10px;
