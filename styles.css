@@ -36,7 +36,7 @@ main h2 {
 }
 
 .btns {
-    width: 800px;
+    width: 50%;
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
@@ -162,6 +162,27 @@ a > .github:active {
       background-color: lightblue;
     }
 
+    header {
+        padding: 10px;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    main h2 {
+        margin-top: 15px;
+        font-size: 1.5rem;
+    }
+
+    .btns {
+        width: 100%;
+    }
+
+    button {
+        font-size: 0.8rem;
+    }
+
     .grid-container {
         flex-direction: column;
         justify-content: center;
@@ -171,5 +192,10 @@ a > .github:active {
 
     .grid {
         width: 80%;
+    }
+
+    footer {
+        font-size: 0.75rem;
+        padding: 10px;
     }
   }
