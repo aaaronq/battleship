@@ -30,7 +30,8 @@ main h2 {
 
 .container {
     margin: 0 auto;
-    width: 1800px;
+    max-width: 1800px;
+    padding: 0px 25px;
     text-align: center;
 }
 
@@ -57,12 +58,13 @@ button:active {
 
 .grid-container {
     display: flex;
-    gap: 200px;
+    justify-content: space-around;
+    gap: 5%;
 }
 
 .grid {
-    width: 800px;
-    height: 800px;
+    width: 50%;
+    aspect-ratio: 1/1;
     border: 1px solid black;
     display: grid;
     grid-template-columns: repeat(10, 1fr);
@@ -144,3 +146,30 @@ a > .github:active {
     transition: all 0.05s;
     cursor: pointer;
 }
+
+@media only screen and (max-width: 1920px) {
+    .grid {
+        width: 40%;
+    }
+    body {
+        background-color: red;
+      }
+    
+}
+
+@media only screen and (max-width: 740px) {
+    body {
+      background-color: lightblue;
+    }
+
+    .grid-container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10vw;
+    }
+
+    .grid {
+        width: 80%;
+    }
+  }
